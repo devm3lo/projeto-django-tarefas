@@ -7,10 +7,10 @@ O objetivo é uma aplicação web simples de "To-Do List" usando o framework Dja
 ## Alunos
 
 * **Nomes:** 
-Eduardo Melo - 01706118
-Julia Greicy - 01699517
-Rúbia Evelyn - 01707900
-Italo Guilherme - 01678558
+* Eduardo Melo - 01706118
+* Julia Greicy - 01699517
+* Rúbia Evelyn - 01707900
+* Italo Guilherme - 01678558
 
 ---
 
