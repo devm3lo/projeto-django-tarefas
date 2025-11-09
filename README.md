@@ -6,7 +6,6 @@ O objetivo é uma aplicação web simples de "To-Do List" usando o framework Dja
 
 ## Alunos
 
-* **Nomes:** 
 * Eduardo Melo - 01706118
 * Julia Greicy - 01699517
 * Rúbia Evelyn - 01707900
@@ -55,4 +54,28 @@ Para rodar este projeto localmente, siga os passos:
     python manage.py runserver
     ```
 
-6.  Acesse `http://127.0.0.1:8000/` no seu navegador.
+---
+
+## Principais URLs do Projeto
+
+Com o servidor rodando, estas são as páginas principais da aplicação:
+
+* **Página Inicial (Lista de Tarefas):** `http://127.0.0.1:8000/`
+* **Página de Login:** `http://127.0.0.1:8000/contas/login/`
+* **Página de Cadastro:** `http://127.0.0.1:8000/cadastro/`
+
+---
+
+## Acessando o Painel de Admin
+
+O projeto também inclui o painel de administração padrão do Django, onde é possível gerenciar usuários e tarefas diretamente pelo banco de dados.
+
+1.  Para acessá-lo, primeiro crie um superusuário:
+    ```bash
+    python manage.py createsuperuser
+    ```
+    (Siga os prompts para criar seu usuário e senha de admin)
+
+2.  Com o servidor rodando, acesse `http://127.0.0.1:8000/admin/`
+
+3.  Faça login com os dados do superusuário que você acabou de criar.
