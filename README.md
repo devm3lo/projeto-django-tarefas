@@ -6,7 +6,11 @@ O objetivo é uma aplicação web simples de "To-Do List" usando o framework Dja
 
 ## Alunos
 
-* **Nome:** [SEU NOME COMPLETO AQUI]
+* **Nome:** 
+Eduardo Melo - 01706118
+Julia Greicy - 01699517
+Rúbia Evelyn - 01707900
+Italo Guilherme - 01678558
 
 ---
 
