@@ -18,7 +18,7 @@ O objetivo é uma aplicação web simples de "To-Do List" usando o framework Dja
 O projeto implementa as seguintes 4 histórias de usuário:
 
 1.  **Cadastro de Usuário:** Como um novo usuário, eu quero me cadastrar na plataforma, para que eu possa ter minha própria conta.
-2.  **Autenticação e Listagem:** Como um usuário cadastrado, eu quero fazer login e ver minha lista de tarefas pendentes, para que eu saiba o que preciso fazer.
+2.  **Autênticação e Listagem:** Como um usuário cadastrado, eu quero fazer login e ver minha lista de tarefas pendentes, para que eu saiba o que preciso fazer.
 3.  **Criação de Tarefa:** Como um usuário logado, eu quero adicionar uma nova tarefa à minha lista (informando um título), para que eu possa registrar novos itens.
 4.  **Gerenciamento de Tarefas:** Como um usuário logado, eu quero marcar uma tarefa como "concluída" ou "excluir" uma tarefa, para que eu possa gerenciar minha lista.
 
@@ -30,7 +30,7 @@ Para rodar este projeto localmente, siga os passos:
 
 1.  Clone o repositório:
     ```bash
-    git clone https://github.com/devm3lo/projeto-django-tarefas
+    git clone [https://github.com/devm3lo/projeto-django-tarefas](https://github.com/devm3lo/projeto-django-tarefas)
     ```
 
 2.  Crie e ative um ambiente virtual:
@@ -79,3 +79,21 @@ O projeto também inclui o painel de administração padrão do Django, onde é 
 2.  Com o servidor rodando, acesse `http://127.0.0.1:8000/admin/`
 
 3.  Faça login com os dados do superusuário que você acabou de criar.
+
+---
+
+## Testes Automatizados 🧪
+
+Para garantir a qualidade, segurança e estabilidade do código, o projeto foi desenvolvido com uma suíte de **5 testes automatizados** (utilizando o `unittest` do Django).
+
+Os testes validam a lógica de negócio de todas as 4 histórias de usuário, incluindo:
+* Segurança (bloqueio de usuários não logados).
+* Criação de tarefas (simulando `POST` e verificando o banco).
+* Conclusão de tarefas.
+* Isolamento de dados (um usuário não pode concluir a tarefa de outro).
+
+### Como Rodar os Testes
+
+Para executar a suíte de testes, pare o servidor e rode o seguinte comando:
+```bash
+python manage.py test
