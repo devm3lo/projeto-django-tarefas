@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Tarefa
+from .forms import TarefaForm
 
 # --- CLASSE DE CADASTRO ---
 # Esta classe começa na borda esquerda
@@ -53,3 +54,28 @@ def excluir_tarefa(request, tarefa_id):
     tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
     tarefa.delete()
     return redirect('lista_tarefas')
+
+# em tarefas/views.py (no final)
+
+@login_required
+def editar_tarefa(request, tarefa_id):
+    # 1. Pega a tarefa do banco, garantindo que ela pertence ao usuário logado
+    tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
+
+    # 2. Verifica se o formulário está sendo enviado (POST)
+    if request.method == 'POST':
+        # Cria uma instância do form COM os dados enviados (request.POST)
+        # E diz a ele qual é a tarefa que estamos editando (instance=tarefa)
+        form = TarefaForm(request.POST, instance=tarefa)
+
+        if form.is_valid():
+            form.save() # Salva as mudanças no banco de dados
+            return redirect('lista_tarefas') # Redireciona para a home
+
+    # 3. Se for o primeiro acesso (GET)
+    else:
+        # Cria o formulário já preenchido com os dados da tarefa
+        form = TarefaForm(instance=tarefa) 
+
+    # 4. Renderiza o template de edição
+    return render(request, 'tarefas/editar_tarefa.html', {'form': form, 'tarefa': tarefa})

@@ -1,6 +1,20 @@
-<h2>Cadastro</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Cadastrar</button>
-</form>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">Cadastro</h3>
+            <hr>
+            
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success w-100">Cadastrar</Fbutton>
+            </form>
+
+            <div class="text-center mt-3">
+                <p>Já tem uma conta? <a href="{% url 'login' %}">Faça o login</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

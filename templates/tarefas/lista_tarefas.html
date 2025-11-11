@@ -1,27 +1,45 @@
-<h1>Minhas Tarefas ({{ request.user.username }})</h1>
-<p><a href="{% url 'logout' %}">Sair</a></p>
+{% extends 'base.html' %}
 
-<hr>
+{% block content %}
 
-<h3>Adicionar Nova Tarefa</h3>
-<form action="{% url 'criar_tarefa' %}" method="POST">
-    {% csrf_token %}
-    <label for="titulo">Título:</label>
-    <input type="text" name="titulo" required>
-    <button type="submit">Adicionar</button>
-</form>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="card-title">Adicionar Nova Tarefa</h3>
+            
+            <form action="{% url 'criar_tarefa' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="titulo" class="form-control" placeholder="O que precisa ser feito?" required>
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<hr>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title">Minhas Tarefas Pendentes</h3>
+            
+            <ul class="list-group list-group-flush">
+                
+                {% for tarefa in tarefas %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ tarefa.titulo }}
+                        
+                        <div>
+                            <a href="{% url 'concluir_tarefa' tarefa.id %}" class="btn btn-sm btn-success">Concluir</a>
+                            <a href="{% url 'editar_tarefa' tarefa.id %}" class="btn btn-sm btn-info">Editar</a> 
+                            
+                            <a href="{% url 'excluir_tarefa' tarefa.id %}" class="btn btn-sm btn-danger">Excluir</a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">
+                        Você não tem tarefas pendentes.
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
-<h3>Minhas Tarefas Pendentes</h3>
-<ul>
-    {% for tarefa in tarefas %}
-        <li>
-            {{ tarefa.titulo }}
-            - <a href="{% url 'concluir_tarefa' tarefa.id %}">Concluir</a>
-             - <a href="{% url 'excluir_tarefa' tarefa.id %}">Excluir</a>
-        </li>
-    {% empty %}
-        <li>Você não tem tarefas pendentes.</li>
-    {% endfor %}
-</ul>
+{% endblock %}

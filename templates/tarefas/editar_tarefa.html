@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            
+            <h3 class="card-title">Editando: {{ tarefa.titulo }}</h3>
+            <hr>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+                
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-success">Salvar Mudanças</button>
+                    <a href="{% url 'lista_tarefas' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
