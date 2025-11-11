@@ -1,6 +1,8 @@
-# Projeto: Gerenciador de Tarefas (Django)
+# Projeto: Gerenciador de Tarefas (CRUD Completo com Django)
 
-O objetivo é uma aplicação web simples de "To-Do List" usando o framework Django, atendendo aos requisitos mínimos de 4 histórias de usuário e persistência de dados em um banco SQLite.
+Este projeto é uma aplicação web completa de "To-Do List" (Gerenciador de Tarefas) desenvolvida em Django.
+
+O projeto cumpre todos os requisitos da disciplina (4 histórias de usuário, banco SQLite), mas foi **elaborado** para incluir um **CRUD Completo** (Create, Read, Update, Delete), uma interface profissional com **Bootstrap** e uma suíte completa de **testes automatizados** para garantir a qualidade do código.
 
 ---
 
@@ -13,20 +15,19 @@ O objetivo é uma aplicação web simples de "To-Do List" usando o framework Dja
 
 ---
 
-## Histórias de Usuário Implementadas
+## Histórias de Usuário e Funcionalidades
 
-O projeto implementa as seguintes 4 histórias de usuário:
+O projeto implementa um CRUD completo, cobrindo 5 histórias de usuário:
 
-1.  **Cadastro de Usuário:** Como um novo usuário, eu quero me cadastrar na plataforma, para que eu possa ter minha própria conta.
-2.  **Autênticação e Listagem:** Como um usuário cadastrado, eu quero fazer login e ver minha lista de tarefas pendentes, para que eu saiba o que preciso fazer.
-3.  **Criação de Tarefa:** Como um usuário logado, eu quero adicionar uma nova tarefa à minha lista (informando um título), para que eu possa registrar novos itens.
-4.  **Gerenciamento de Tarefas:** Como um usuário logado, eu quero marcar uma tarefa como "concluída" ou "excluir" uma tarefa, para que eu possa gerenciar minha lista.
+1.  **Cadastro (Create):** Como um novo usuário, eu quero me cadastrar na plataforma.
+2.  **Login e Leitura (Read):** Como um usuário cadastrado, eu quero fazer login e ver minha lista de tarefas pendentes.
+3.  **Criação (Create):** Como um usuário logado, eu quero adicionar uma nova tarefa à minha lista.
+4.  **Edição (Update):** Como um usuário logado, eu quero clicar em "Editar" para corrigir o título de uma tarefa existente.
+5.  **Gestão (Delete):** Como um usuário logado, eu quero marcar uma tarefa como "concluída" ou "excluir" uma tarefa.
 
 ---
 
 ## Como Rodar o Projeto
-
-Para rodar este projeto localmente, siga os passos:
 
 1.  Clone o repositório:
     ```bash
@@ -63,34 +64,18 @@ Com o servidor rodando, estas são as páginas principais da aplicação:
 * **Página Inicial (Lista de Tarefas):** `http://127.0.0.1:8000/`
 * **Página de Login:** `http://127.0.0.1:8000/contas/login/`
 * **Página de Cadastro:** `http://127.0.0.1:8000/cadastro/`
-
----
-
-## Acessando o Painel de Admin
-
-O projeto também inclui o painel de administração padrão do Django, onde é possível gerenciar usuários e tarefas diretamente pelo banco de dados.
-
-1.  Para acessá-lo, primeiro crie um superusuário:
-    ```bash
-    python manage.py createsuperuser
-    ```
-    (Siga os prompts para criar seu usuário e senha de admin)
-
-2.  Com o servidor rodando, acesse `http://127.0.0.1:8000/admin/`
-
-3.  Faça login com os dados do superusuário que você acabou de criar.
+* **Painel de Admin:** `http://127.0.0.1:8000/admin/`
 
 ---
 
 ## Testes Automatizados 🧪
 
-Para garantir a qualidade, segurança e estabilidade do código, o projeto foi desenvolvido com uma suíte de **5 testes automatizados** (utilizando o `unittest` do Django).
+Para garantir a qualidade, segurança e estabilidade do código, o projeto foi desenvolvido com uma suíte de **8 testes automatizados** (utilizando o `unittest` do Django).
 
-Os testes validam a lógica de negócio de todas as 4 histórias de usuário, incluindo:
+Os testes validam a lógica de negócio de todo o CRUD (Criar, Ler, Editar, Excluir), incluindo:
 * Segurança (bloqueio de usuários não logados).
-* Criação de tarefas (simulando `POST` e verificando o banco).
-* Conclusão de tarefas.
-* Isolamento de dados (um usuário não pode concluir a tarefa de outro).
+* Criação, edição, conclusão e exclusão de tarefas.
+* Isolamento de dados (um usuário não pode editar/excluir a tarefa de outro).
 
 ### Como Rodar os Testes
 
