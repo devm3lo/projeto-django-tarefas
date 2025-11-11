@@ -30,7 +30,7 @@ Para rodar este projeto localmente, siga os passos:
 
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/devm3lo/projeto-django-tarefas](https://github.com/devm3lo/projeto-django-tarefas)
+    git clone https://github.com/devm3lo/projeto-django-tarefas
     ```
 
 2.  Crie e ative um ambiente virtual:
