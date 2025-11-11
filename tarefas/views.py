@@ -1,5 +1,3 @@
-# --- IMPORTS ---
-# (Eu juntei seus imports duplicados para ficar mais limpo)
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -8,74 +6,71 @@ from django.contrib.auth.decorators import login_required
 from .models import Tarefa
 from .forms import TarefaForm
 
-# --- CLASSE DE CADASTRO ---
-# Esta classe começa na borda esquerda
+
 class CadastroView(generic.CreateView):
+    """View baseada em classe para o cadastro de novos usuários."""
     form_class = UserCreationForm
     success_url = reverse_lazy('login') # Redireciona para o login após cadastrar
     template_name = 'registration/cadastro.html'
-# A classe TERMINA AQUI
 
-# --- FUNÇÕES ---
-# Note que esta linha começa na borda esquerda, FORA da classe
+
 @login_required 
 def lista_tarefas(request):
-    # Filtra as tarefas para mostrar APENAS as do usuário logado
+    """Exibe a lista de tarefas pendentes do usuário logado."""
+    # Filtra as tarefas para mostrar APENAS as do usuário logado e não concluídas.
     tarefas = Tarefa.objects.filter(usuario=request.user, concluida=False)
-
-    # Renderiza o template com as tarefas
     return render(request, 'tarefas/lista_tarefas.html', {'tarefas': tarefas})
 
-# Esta também começa na borda esquerda
+
 @login_required
 def criar_tarefa(request):
+    """Cria uma nova tarefa associada ao usuário logado."""
     if request.method == 'POST':
-        # Pega o título do formulário
         titulo = request.POST.get('titulo')
-        # Cria a tarefa associada ao usuário logado
+        # Cria a tarefa já associada ao usuário da requisição
         Tarefa.objects.create(titulo=titulo, usuario=request.user)
-        # Redireciona de volta para a lista
         return redirect('lista_tarefas')
-
-    # Se não for POST, apenas redireciona (ou poderia ter um form separado)
+    
+    # Se for GET, apenas redireciona (o form está na própria lista)
     return redirect('lista_tarefas')
 
-# Esta também
+
 @login_required
 def concluir_tarefa(request, tarefa_id):
+    """Marca uma tarefa específica como concluída."""
+    # O 'get_object_or_404' já filtra pelo 'usuario' para segurança,
+    # impedindo que um usuário acesse a tarefa de outro.
     tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
     tarefa.concluida = True
     tarefa.save()
     return redirect('lista_tarefas')
 
-# E esta também
+
 @login_required
 def excluir_tarefa(request, tarefa_id):
+    """Exclui uma tarefa específica do banco de dados."""
+    # Garante que o usuário só possa excluir suas próprias tarefas.
     tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
     tarefa.delete()
     return redirect('lista_tarefas')
 
-# em tarefas/views.py (no final)
 
 @login_required
 def editar_tarefa(request, tarefa_id):
-    # 1. Pega a tarefa do banco, garantindo que ela pertence ao usuário logado
+    """Exibe um formulário para editar uma tarefa existente."""
+    # Garante que o usuário só possa editar suas próprias tarefas.
     tarefa = get_object_or_404(Tarefa, id=tarefa_id, usuario=request.user)
 
-    # 2. Verifica se o formulário está sendo enviado (POST)
     if request.method == 'POST':
-        # Cria uma instância do form COM os dados enviados (request.POST)
-        # E diz a ele qual é a tarefa que estamos editando (instance=tarefa)
+        # Popula o formulário com os dados enviados (request.POST) e
+        # aponta para a instância de tarefa que estamos editando.
         form = TarefaForm(request.POST, instance=tarefa)
-
         if form.is_valid():
-            form.save() # Salva as mudanças no banco de dados
-            return redirect('lista_tarefas') # Redireciona para a home
-
-    # 3. Se for o primeiro acesso (GET)
+            form.save()
+            return redirect('lista_tarefas')
     else:
-        # Cria o formulário já preenchido com os dados da tarefa
+        # Se for um acesso GET, cria o formulário já preenchido
+        # com os dados atuais da tarefa.
         form = TarefaForm(instance=tarefa) 
 
-    # 4. Renderiza o template de edição
     return render(request, 'tarefas/editar_tarefa.html', {'form': form, 'tarefa': tarefa})

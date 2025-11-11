@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Tarefa # <-- IMPORTE SEU MODELO
+from .models import Tarefa
 
-admin.site.register(Tarefa) # <-- REGISTRE O MODELO AQUI
+admin.site.register(Tarefa)

@@ -1,13 +1,15 @@
-# em tarefas/forms.py
 from django import forms
 from .models import Tarefa
 
 class TarefaForm(forms.ModelForm):
+    """Formulário para criar e editar uma Tarefa."""
+    
     class Meta:
         model = Tarefa
-        fields = ['titulo'] # O único campo que queremos editar é o 'titulo'
-
-        # (Opcional) Adiciona uma classe do Bootstrap ao campo
+        # Define os campos do modelo que o formulário irá usar
+        fields = ['titulo']
+        
+        # Adiciona classes CSS (Bootstrap) para estilizar o campo no template
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control'}),
         }

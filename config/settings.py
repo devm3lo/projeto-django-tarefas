@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os # <-- CORREÇÃO 1: O import 'os' deve ficar aqui em cima
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'tarefas', # <-- CORREÇÃO 2: Adicionado o app 'tarefas' AQUI
+    # Nossos apps locais
+    'tarefas',
 ]
 
 MIDDLEWARE = [
@@ -57,16 +58,12 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        
-        # <-- CORREÇÃO 3: Editado 'DIRS' para apontar para sua pasta 'templates'
+        # Aponta para a pasta 'templates' na raiz do projeto
         'DIRS': [os.path.join(BASE_DIR, 'templates')], 
-        
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                # <-- CORREÇÃO 4: Adicionado o 'debug' que estava faltando
                 'django.template.context_processors.debug', 
-                
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -130,7 +127,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# <-- CORREÇÃO 5: As URLs de Login/Logout ficam aqui no final
-LOGIN_REDIRECT_URL = 'lista_tarefas'
-LOGOUT_REDIRECT_URL = 'login'
-LOGIN_URL = 'login' # <-- ADICIONE ESTA LINHA
+# Configurações de Autenticação
+LOGIN_REDIRECT_URL = 'lista_tarefas' # Para onde ir após o login
+LOGOUT_REDIRECT_URL = 'login' # Para onde ir após o logout
+LOGIN_URL = 'login' # Qual a URL de login (para o @login_required)
