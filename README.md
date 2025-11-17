@@ -12,6 +12,7 @@ O projeto cumpre todos os requisitos da disciplina (4 histórias de usuário, ba
 * Julia Greicy - 01699517
 * Rúbia Evelyn - 01707900
 * Italo Guilherme - 01678558
+* Deivid Vinícius - 01710295
 
 ---
 
